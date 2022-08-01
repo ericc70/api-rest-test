@@ -1,19 +1,19 @@
-const { MongoClient } = require("mongodb");
+const { MongoClient } = require("mongodb")
 
 const client = null;
 
 function connecter(url, callback) {
   if (client == null) {
-    client = new MongoClient(url);
 
-    client.connect((erreur) => {
-      if (erreur) {
-        client = null
-        callback(erreur);
-      } else {
-        callback();
-      }
-    })
+     MongoClient.connect(url, { useNewUrlParser: true }, (error, client) => {
+        if (error) {
+          return console.log("Connection failed for some reason");
+        }
+        console.log("Connection established - All well");
+        
+      });
+
+  
   }else{
     callback()
   }
